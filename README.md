@@ -1,21 +1,16 @@
 # UsersApp
 
-**TODO: Add description**
-
 ## Installation
+Download repo and configure database in `config.exs`, also if needed run `mix deps.get`.
+Run `mix ecto.create` and `mix ecto.migrate`. Then start shell with `iex -S mix`.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `users_app` to your list of dependencies in `mix.exs`:
-
+**Usage**
 ```elixir
-def deps do
-  [
-    {:users_app, "~> 0.1.0"}
-  ]
-end
+#define user
+iex> user = %UsersApp.Person{email: "pero@gmail.com"}
+#add user to table
+iex> user |> UsersApp.Person.changeset |> Users.insert
+#soft_delete user from table
+iex> user = Users.get_by(UsersApp.Person, id: x)
+iex> user |> UsersApp.Person.soft_delete |> Users.update
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/users_app](https://hexdocs.pm/users_app).
-
